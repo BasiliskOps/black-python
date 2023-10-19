@@ -97,3 +97,19 @@ def server_loop(local_host, local_port, remote_host, remote_port, receive_first)
         print("[!!] Check for other listeening sockets or correct permissions.")
         sys.exit(0)
 
+    print("[*] Listening on %s:%d" % (local_host, local_port))
+    server.listen(5)
+    while True:
+        client_socket, addr = server.accept()
+        # print out the local conneection information
+        line = ". Received incoming connection from %s:%d" % (addr[0], addr[1])
+        print(line)
+        # begin a thread that communicates w/remote host
+
+        proxy_thread = threading.Thread(
+            target=proxy_handler,
+            args=(client_socket, remote_host,
+            remote_port, receive_first)
+        )
+        proxy_thread.start()
+
