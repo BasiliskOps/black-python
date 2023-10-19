@@ -86,4 +86,14 @@ def proxy_handler(client_socket, remote_host, remote_port, receive_first):
             print("[*] No more data. Closing connections.")
             break
 
-        
+def server_loop(local_host, local_port, remote_host, remote_port, receive_first):
+    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    try:
+        server.bind((local_host, local_port))
+    except Exception as e:
+        print('Problem on bind: %r' % e)
+
+        print("[!!] Faiiled to listen on %s:%d" % (local_host, local_port))
+        print("[!!] Check for other listeening sockets or correct permissions.")
+        sys.exit(0)
+
