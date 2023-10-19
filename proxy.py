@@ -126,7 +126,7 @@ def main():
     remote_host = sys.argv[3]
     remote_port = int(sys.argv[4])
 
-    receive_first = sys.arg[5]
+    receive_first = sys.argv[5]
 
     if "True" in receive_first:
         receive_first = True
